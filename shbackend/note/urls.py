@@ -1,0 +1,7 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.NoteView.as_view()),
+    path("/detail", views.NoteDetailView.as_view()),
+]
