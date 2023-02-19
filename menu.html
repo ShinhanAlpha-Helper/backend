@@ -16,15 +16,12 @@
 
         <style>
             body {
-                width: 375px;
-                height: 667px;
+                margin: 0 auto;
+                max-width: 375px;
             }
             
             header {
                 position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
                 z-index: 100;
             }
 
@@ -58,11 +55,36 @@
                 position: fixed;
                 z-index: 100;
             }
-            
-            .bottomnav {
-                margin: 0;
-                padding: 0 5px;
-                border: 1px solid black;
+
+            a {
+                color: black;
+                text-decoration: none;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            #menu-wrapper {
+            overflow-x: auto;  
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            border-collapse: collapse;
+            height: 60px;
+            }
+
+            table {
+                border-collapse: collapse;
+                max-width: 375px;
+                height: 60px;
+            }
+
+            th {
+                text-align: center;
+                background-color: #ffffff;
+                color: #fff;
+                text-transform: uppercase;
+                font-weight: bold;
+                padding: 0 15px;
             }
         </style>
     </head>
@@ -234,14 +256,18 @@
         </main>
 
         <footer>
-            <div class="fixed-bottom" id="bottom" style="width: 375px; background-color: #ffffff;">
-                <span class="bottomnav"><i class="fa-light fa-xmark"></i></span>
-                <span class="bottomnav">홈</span>
-                <span class="bottomnav">계좌개설</span>
-                <span class="bottomnav">인증센터</span>
-                <span class="bottomnav">챗봇</span>
-                <span class="bottomnav">로그인</span>
-                <span class="bottomnav"><i class="fa-solid fa-power-off"></i></span>
+            <div id="menu-wrapper">
+                <table>
+                    <tr>
+                        <th><a href="#">X</a></th>
+                        <th><a href="#">홈</a> </th>
+                        <th><a href="#">계좌<br>개설</a></th>
+                        <th><a href="#">인증<br>센터</a></th>
+                        <th><a href="#">챗봇</a></th>
+                        <th><a href="#">로그인</a></th>
+                        <th><a href="#"><i class="fa-solid fa-power-off"></i></a></th>
+                    </tr>
+                </table>
             </div>
         </footer>
 
