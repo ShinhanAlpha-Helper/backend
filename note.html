@@ -60,10 +60,7 @@
             function detailsearch() {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://127.0.0.1:8000/note/detail',
-                    data: {
-                        title: $("#wantword").val(),
-                    },
+                    url: `http://127.0.0.1:8000/note/detail?title=${$("#wantword").val()}`,
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader("Authorization", "JWT " + localStorage["token"]);
                     },
