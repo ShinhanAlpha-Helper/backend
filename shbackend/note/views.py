@@ -3,6 +3,7 @@ from rest_framework import generics, mixins
 from .models import Note
 from .serializers import (
     NoteSerializer,
+    NoteCreateSerializer,
 )
 
 from rest_framework.views import APIView
@@ -14,11 +15,15 @@ from rest_framework.permissions import IsAuthenticated
 
 class NoteView (
     mixins.ListModelMixin,
+    mixins.CreateModelMixin,
     generics.GenericAPIView,
 ):
     permission_classes = [IsAuthenticated]
 
-    serializer_class = NoteSerializer
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return NoteCreateSerializer
+        return NoteSerializer
 
     def get_queryset(self):
         member = self.request.user.id
