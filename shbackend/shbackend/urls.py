@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/token', TokenObtainPairView.as_view()),
     path('dict', include('dictionary.urls')),
     path('note', include('note.urls')),
+    path('news', include('news.urls')),
 ]
