@@ -77,6 +77,64 @@
             }
 
         </style>
+
+        <script>
+            $(document).ready(function() {
+                $.get("http://127.0.0.1:8000/news/domestic")
+                    .then((result) => {
+                        console.log(result);
+                        $("#domesticnews").html("");
+
+                        for (let i = 0; i < result.results.length; i++) {
+                            const news = result.results[i];
+
+                            $("#domesticnews").append(
+                                $(`<li>${news.date}   ${news.press}<br>
+                                    <a style="text-decoration: none;">${news.title}</a>
+                                    </li><hr>`)
+                            )
+                        }
+                    });
+            })
+
+            function domesticnews() {
+                $.get("http://127.0.0.1:8000/news/domestic")
+                    .then((result) => {
+                        console.log(result);
+                        $("#domesticnews").html("");
+
+                        for (let i = 0; i < result.results.length; i++) {
+                            const news = result.results[i];
+
+                            $("#domesticnews").append(
+                                $(`<li>${news.date}   ${news.press}<br>
+                                    <a style="text-decoration: none;">${news.title}</a>
+                                    </li><hr>`)
+                            )
+                        }
+                    });
+            }
+
+            function overseasnews() {
+                $.get("http://127.0.0.1:8000/news/overseas")
+                    .then((result) => {
+                        console.log(result);
+                        $("#overseasnews").html("");
+
+                        for (let i = 0; i < result.results.length; i++) {
+                            const news = result.results[i];
+
+                            $("#overseasnews").append(
+                                $(`<li>${news.date}   ${news.press}<br>
+                                    <a style="text-decoration: none;">${news.title}</a>
+                                    </li><hr>`)
+                            )
+                        }
+                    });
+            }
+
+
+        </script>
     </head>
     <body>
         <header>
@@ -95,8 +153,8 @@
             </div>
 
             <div id="flexaround" style="padding-top: 20px;">
-                <div><a href="#" class="header_a">국내</a></div>
-                <div><a href="#" class="header_a">해외</a></div>
+                <div><a href="#" class="header_a" onclick="domesticnews()">국내</a></div>
+                <div><a href="#" class="header_a" onclick="overseasnews()">해외</a></div>
                 <div><a href="#" class="header_a">MY종목</a></div>
             </div>
             <div style="border-top: 1px solid black; margin: 16px 0;"></div>
@@ -117,17 +175,7 @@
 
         <main>
             <div class="div" style="overflow-y: scroll; height:530px;">
-                <ul>
-                    리튬국유화 선언... 멕시코 투자 피난처로 떠오르나 ['https://finance.naver.com/news/news_read.naver?article_id=0005090967&office_id=009&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '매일경제', '2023-02-20 14:26']
-IMA 아시아 "中경제 1분기 저점 찍고 2분기부터 상승" ['https://finance.naver.com/news/news_read.naver?article_id=0001084095&office_id=215&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제TV', '2023-02-20 13:30']
-FOMC 의사록, PCE 물가지수, 엔비디아…나스닥 흔들까[이번주 美 증시는] ['https://finance.naver.com/news/news_read.naver?article_id=0004853230&office_id=008&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '머니투데이', '2023-02-20 12:47']
-인민은행, 기준금리 6개월째 동결…환율 상승에 금융시장 불안 [강현우의 중국주식 분석] ['https://finance.naver.com/news/news_read.naver?article_id=0004812392&office_id=015&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제', '2023-02-20 11:59']
-또 '못난이 통화'된 원화, 이달 들어 주요국 중 최악 ['https://finance.naver.com/news/news_read.naver?article_id=0005428054&office_id=018&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '이데일리', '2023-02-20 11:22']
-IEA "中 에너지 수요 급증...내년 겨울 에너지 공급대란 우려" ['https://finance.naver.com/news/news_read.naver?article_id=0001084066&office_id=215&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제TV', '2023-02-20 11:21']
-美 채권거물 "경제 붕괴없이 연준 인플레 목표 도달 불가능" ['https://finance.naver.com/news/news_read.naver?article_id=0001084060&office_id=215&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제TV', '2023-02-20 11:06']
-바이오·리튬·챗GPT…주식 초고수, 달리는 말에 올라탔다 ['https://finance.naver.com/news/news_read.naver?article_id=0005090827&office_id=009&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '매일경제', '2023-02-20 10:38']
-캐나다 억만장자 "챗GPT가 구글 죽이고 있어...지분투자 고려중" ['https://finance.naver.com/news/news_read.naver?article_id=0001084052&office_id=215&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제TV', '2023-02-20 10:36']
-BoA "연준, 6월까지 25bp씩 세 차례 금리인상 예상" ['https://finance.naver.com/news/news_read.naver?article_id=0001084041&office_id=215&mode=LSS3D&type=0&section_id=101&section_id2=258&section_id3=403&date=20230220&page=1', '한국경제TV', '2023-02-20 10:19']
+                <ul id="domesticnews" style="list-style: none;">
                 </ul>
             </div>
         </main>
