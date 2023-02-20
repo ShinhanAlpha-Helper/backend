@@ -13,3 +13,16 @@ class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
+
+
+class NoteCreateSerializer(serializers.ModelSerializer):
+    member = serializers.HiddenField(default=serializers.CurrentUserDefault(), required=False)
+
+    def validate_member(self, value):
+        if not value.is_authenticated: 
+            raise serializers.ValidationError("member is required")
+        return value
+
+    class Meta:
+        model = Note
+        fields = '__all__'
