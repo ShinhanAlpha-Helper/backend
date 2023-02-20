@@ -18,6 +18,10 @@
                 max-width: 375px;
             }
 
+            header {
+                margin-top: 30px;
+            }
+
             footer {
                 z-index: 100;
             }
@@ -40,7 +44,7 @@
 
             table {
                 border-collapse: collapse;
-                max-width: 375px;
+                width: 375px;
                 height: 60px;
             }
 
@@ -148,7 +152,7 @@
                 <div id="headright">
                     <i class="fa-regular fa-file-magnifying-glass"></i> <!--검색 기능 아이콘-->
                     <i class="fa-duotone fa-bell"></i> <!--종 모양 아이콘-->
-                    <i class="fa-regular fa-arrow-rotate-right"></i> <!--리로드 아이콘-->
+                    <button>리로드</button> <!-- <i class="fa-regular fa-arrow-rotate-right"></i> 리로드 아이콘 -->
                 </div>
             </div>
 
@@ -166,7 +170,13 @@
                     <option>오늘의뉴스</option>
                     <option>IR</option>
                     <option>매매동향</option>
-                    <option>매매동향</option>
+                    <option>시황</option>
+                    <option>특징주</option>
+                    <option>해외증시</option>
+                    <option>외환</option>
+                    <option>체권</option>
+                    <option>펀드</option>
+                    <option>ELS/DLS</option>
                 </select>
                 <input type="text" placeholder="검색어를 입력하세요">
             </div>
@@ -174,7 +184,7 @@
         </header>
 
         <main>
-            <div class="div" style="overflow-y: scroll; height:530px;">
+            <div class="div" style="overflow-y: scroll; height:490px;">
                 <ul id="news" style="list-style: none;">
                 </ul>
             </div>
