@@ -44,7 +44,7 @@ class NoteDetailView (
 
     def get_queryset(self):
         member = self.request.user.id
-        notetitle = self.request.data.get('title')
+        notetitle = self.request.query_params['title']
         return Note.objects.filter(member_id=member, title=notetitle)
 
     def get (self, request, *args, **kwargs):
