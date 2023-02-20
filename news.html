@@ -83,12 +83,12 @@
                 $.get("http://127.0.0.1:8000/news/domestic")
                     .then((result) => {
                         console.log(result);
-                        $("#domesticnews").html("");
+                        $("#news").html("");
 
                         for (let i = 0; i < result.results.length; i++) {
                             const news = result.results[i];
 
-                            $("#domesticnews").append(
+                            $("#news").append(
                                 $(`<li>${news.date}   ${news.press}<br>
                                     <a style="text-decoration: none;">${news.title}</a>
                                     </li><hr>`)
@@ -101,12 +101,12 @@
                 $.get("http://127.0.0.1:8000/news/domestic")
                     .then((result) => {
                         console.log(result);
-                        $("#domesticnews").html("");
+                        $("#news").html("");
 
                         for (let i = 0; i < result.results.length; i++) {
                             const news = result.results[i];
 
-                            $("#domesticnews").append(
+                            $("#news").append(
                                 $(`<li>${news.date}   ${news.press}<br>
                                     <a style="text-decoration: none;">${news.title}</a>
                                     </li><hr>`)
@@ -119,12 +119,12 @@
                 $.get("http://127.0.0.1:8000/news/overseas")
                     .then((result) => {
                         console.log(result);
-                        $("#overseasnews").html("");
+                        $("#news").html("");
 
                         for (let i = 0; i < result.results.length; i++) {
                             const news = result.results[i];
 
-                            $("#overseasnews").append(
+                            $("#news").append(
                                 $(`<li>${news.date}   ${news.press}<br>
                                     <a style="text-decoration: none;">${news.title}</a>
                                     </li><hr>`)
@@ -175,7 +175,7 @@
 
         <main>
             <div class="div" style="overflow-y: scroll; height:530px;">
-                <ul id="domesticnews" style="list-style: none;">
+                <ul id="news" style="list-style: none;">
                 </ul>
             </div>
         </main>
