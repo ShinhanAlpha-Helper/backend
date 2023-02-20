@@ -89,12 +89,12 @@
                         console.log(result);
                         $("#news").html("");
 
-                        for (let i = 0; i < result.results.length; i++) {
+                        for (let i = result.results.length - 1; i >= 0; i--) {
                             const news = result.results[i];
 
                             $("#news").append(
-                                $(`<li>${news.date}   ${news.press}<br>
-                                    <a style="text-decoration: none;">${news.title}</a>
+                                $(`<li><span style="font-size: 8px;">${news.date}    ${news.press}</span><br>
+                                    <a href="${news.url}" style="text-decoration: none; font-size: 12px; color: black;"><strong>${news.title}</strong></a>
                                     </li><hr>`)
                             )
                         }
@@ -107,12 +107,12 @@
                         console.log(result);
                         $("#news").html("");
 
-                        for (let i = 0; i < result.results.length; i++) {
+                        for (let i = result.results.length - 1; i >= 0; i--) {
                             const news = result.results[i];
 
                             $("#news").append(
-                                $(`<li>${news.date}   ${news.press}<br>
-                                    <a style="text-decoration: none;">${news.title}</a>
+                                $(`<li><span style="font-size: 8px;">${news.date}    ${news.press}</span><br>
+                                    <a href="${news.url}" style="text-decoration: none; font-size: 12px; color: black;"><strong>${news.title}</strong></a>
                                     </li><hr>`)
                             )
                         }
@@ -125,19 +125,35 @@
                         console.log(result);
                         $("#news").html("");
 
-                        for (let i = 0; i < result.results.length; i++) {
+                        for (let i = result.results.length - 1; i >= 0; i--) {
                             const news = result.results[i];
 
                             $("#news").append(
-                                $(`<li>${news.date}   ${news.press}<br>
-                                    <a style="text-decoration: none;">${news.title}</a>
+                                $(`<li><span style="font-size: 8px;">${news.date}    ${news.press}</span><br>
+                                    <a href="${news.url}" style="text-decoration: none; font-size: 12px; color: black;"><strong>${news.title}</strong></a>
                                     </li><hr>`)
                             )
                         }
                     });
             }
 
+            function newsreload() {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:8000/news/domestic',
+                    success: (result) => {
+                        console.log(result);
+                    }
+                })
 
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://127.0.0.1:8000/news/overseas',
+                    success: (result) => {
+                        console.log(result);
+                    }
+                })
+            }
         </script>
     </head>
     <body>
@@ -152,7 +168,7 @@
                 <div id="headright">
                     <i class="fa-regular fa-file-magnifying-glass"></i> <!--검색 기능 아이콘-->
                     <i class="fa-duotone fa-bell"></i> <!--종 모양 아이콘-->
-                    <button>리로드</button> <!-- <i class="fa-regular fa-arrow-rotate-right"></i> 리로드 아이콘 -->
+                    <button onclick="newsreload()">리로드</button> <!-- <i class="fa-regular fa-arrow-rotate-right"></i> 리로드 아이콘 -->
                 </div>
             </div>
 
