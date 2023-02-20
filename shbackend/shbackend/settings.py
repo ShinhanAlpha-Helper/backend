@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'member.apps.MemberConfig',
     'dictionary.apps.DictionaryConfig',
     'note.apps.NoteConfig',
+    'news.apps.NewsConfig',
 ]
 
 MIDDLEWARE = [
