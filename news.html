@@ -160,15 +160,16 @@
         <header>
             <div id="flexbetween">
                 <div id="headleft">
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <i class="fa-solid fa-chevron-left"></i> <!--Vue 전용 코드 : <font-awesome-icon icon="fa-solid fa-chevron-left" />-->
                     <div style="display: inline-block; padding-left: 10px;">뉴스/공시</div>
-                    <i class="fa-sharp fa-regular fa-chevron-down"></i>
+                    <i class="fa-solid fa-chevron-down"></i>    <!--Vue 전용 코드 : <font-awesome-icon icon="fa-solid fa-chevron-down" /> -->
                 </div>
     
                 <div id="headright">
                     <i class="fa-regular fa-file-magnifying-glass"></i> <!--검색 기능 아이콘-->
-                    <i class="fa-duotone fa-bell"></i> <!--종 모양 아이콘-->
-                    <button onclick="newsreload()">리로드</button> <!-- <i class="fa-regular fa-arrow-rotate-right"></i> 리로드 아이콘 -->
+                    <i class="fa-regular fa-bell"></i> <!--종 모양 아이콘--> <!--Vue 전용 코드 : <font-awesome-icon icon="fa-regular fa-bell" />-->
+                    <button style="border: 1px solid black; border-radius: 5px;">가</button>
+                    <button onclick="newsreload()" style="border: 0; background-color: #fff;"><i class="fa-solid fa-rotate-right"></i></button> <!--Vue 전용 코드 : <font-awesome-icon icon="fa-solid fa-rotate-right" />-->
                 </div>
             </div>
 
