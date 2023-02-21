@@ -17,6 +17,9 @@ class NoteSerializer(serializers.ModelSerializer):
 
 class NoteCreateSerializer(serializers.ModelSerializer):
     member = serializers.HiddenField(default=serializers.CurrentUserDefault(), required=False)
+    tstamp = serializers.DateTimeField(
+        read_only = True, format = '%Y-%m-%d'
+    )
 
     def validate_member(self, value):
         if not value.is_authenticated: 
