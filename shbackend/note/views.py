@@ -83,22 +83,26 @@ class NoteTodayRankView (APIView):
 
         return Response(ret, status=status.HTTP_201_CREATED)
 
-# class NoteWeeklyRankView (APIView):
+class NoteWeeklyRankView (APIView):
 
-#     def get (self, request, *args, **kwargs):
-#         now = datetime.datetime.now()
-#         now_date = now.strftime('%Y-%m-%d')
-#         queryset = Note.objects.filter(tstamp__contains=tstamp__range()) \
-#                 .values('title', 'count').order_by('title') \
-#                 .annotate(total=Sum('count')).order_by('-total')[:3]
+    def get (self, request, *args, **kwargs):
+        startdate = request.query_params['startdate'] + " 00:00:00"
+        lastdate = request.query_params['lastdate'] + " 23:59:59"
         
-#         print(queryset)
+        start_time_obj = datetime.datetime.strptime(startdate, '%Y-%m-%d %H:%M:%S')
+        last_time_obj = datetime.datetime.strptime(lastdate, '%Y-%m-%d %H:%M:%S')
 
-#         ret = []
-#         for q in queryset:
-#             ret.append({
-#                 'title': q['title'],
-#                 'total': q['total'],
-#             })
+        queryset = Note.objects.filter(tstamp__range=[start_time_obj, last_time_obj]) \
+                .values('title', 'count').order_by('title') \
+                .annotate(total=Sum('count')).order_by('-total')
+        
+        print(queryset)
 
-#         return Response(ret, status=status.HTTP_201_CREATED)
+        ret = []
+        for q in queryset:
+            ret.append({
+                'title': q['title'],
+                'total': q['total'],
+            })
+
+        return Response(ret, status=status.HTTP_201_CREATED)
