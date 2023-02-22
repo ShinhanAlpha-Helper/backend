@@ -50,20 +50,44 @@ class DomesticNewsView(
 
         driver.get(url)
 
-        # 주제
-        subject_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSubject > a')
+        all_elements = driver.find_elements(By.CSS_SELECTOR, "#contentarea_left > ul > li.newsList.top > dl > *")
 
-        # 언론사, 뉴스 날짜
-        press_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSummary > span.press')
-        wdate_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSummary > span.wdate')
 
-        for i in range(len(subject_elements)-1, -1, -1):
-            object, is_created = DomesticNews.objects.get_or_create(
-                title=subject_elements[i].text,
-                url=subject_elements[i].get_attribute('href'),
-                press=press_elements[i].text,
-                date=wdate_elements[i].text,
-            )
+        results = []
+        row = {}
+        for elem in all_elements:
+            attr_class = elem.get_attribute('class')
+            if attr_class == 'thumb':
+                row['imgurl'] = elem.find_element(By.TAG_NAME, 'img').get_attribute('src')
+
+            if attr_class == 'articleSubject':
+                row['subject'] = elem.find_element(By.TAG_NAME, 'a').text
+                row['url'] = elem.find_element(By.TAG_NAME, 'a').get_attribute('href')
+
+            if attr_class == 'articleSummary':
+                row['press'] = elem.find_element(By.CLASS_NAME, 'press').text
+                row['wdate'] = elem.find_element(By.CLASS_NAME, 'wdate').text
+                results.append(row)
+                row = {}
+
+        for i in range(len(results)-1, -1, -1):
+            try:
+                object, is_created = DomesticNews.objects.get_or_create(
+                    title = results[i]['subject'],
+                    url=results[i]['url'],
+                    press=results[i]['press'],
+                    date=results[i]['wdate'],
+                    img=results[i]['imgurl'],
+                )
+            except:
+                object, is_created = DomesticNews.objects.get_or_create(
+                    title = results[i]['subject'],
+                    url=results[i]['url'],
+                    press=results[i]['press'],
+                    date=results[i]['wdate'],
+                    img='',
+                )        
+
             object.save()
 
         driver.implicitly_wait(10)
@@ -104,20 +128,44 @@ class OverseasNewsView(
 
         driver.get(url)
 
-        # 주제
-        subject_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSubject > a')
+        all_elements = driver.find_elements(By.CSS_SELECTOR, "#contentarea_left > ul > li.newsList.top > dl > *")
 
-        # 언론사, 뉴스 날짜
-        press_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSummary > span.press')
-        wdate_elements = driver.find_elements(By.CSS_SELECTOR, '#contentarea_left > ul > li.newsList.top > dl > .articleSummary > span.wdate')
 
-        for i in range(len(subject_elements)-1, -1, -1):
-            object, is_created = OverseasNews.objects.get_or_create(
-                title=subject_elements[i].text,
-                url=subject_elements[i].get_attribute('href'),
-                press=press_elements[i].text,
-                date=wdate_elements[i].text,
-            )
+        results = []
+        row = {}
+        for elem in all_elements:
+            attr_class = elem.get_attribute('class')
+            if attr_class == 'thumb':
+                row['imgurl'] = elem.find_element(By.TAG_NAME, 'img').get_attribute('src')
+
+            if attr_class == 'articleSubject':
+                row['subject'] = elem.find_element(By.TAG_NAME, 'a').text
+                row['url'] = elem.find_element(By.TAG_NAME, 'a').get_attribute('href')
+
+            if attr_class == 'articleSummary':
+                row['press'] = elem.find_element(By.CLASS_NAME, 'press').text
+                row['wdate'] = elem.find_element(By.CLASS_NAME, 'wdate').text
+                results.append(row)
+                row = {}
+
+        for i in range(len(results)-1, -1, -1):
+            try:
+                object, is_created = OverseasNews.objects.get_or_create(
+                    title = results[i]['subject'],
+                    url=results[i]['url'],
+                    press=results[i]['press'],
+                    date=results[i]['wdate'],
+                    img=results[i]['imgurl'],
+                )
+            except:
+                object, is_created = OverseasNews.objects.get_or_create(
+                    title = results[i]['subject'],
+                    url=results[i]['url'],
+                    press=results[i]['press'],
+                    date=results[i]['wdate'],
+                    img='',
+                )        
+
             object.save()
 
         driver.implicitly_wait(10)
