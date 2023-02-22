@@ -8,6 +8,7 @@ class DomesticNews (models.Model):
     url = models.URLField(max_length=500, verbose_name="뉴스 링크")
     press = models.CharField(max_length=128, verbose_name="언론사")
     date = models.CharField(max_length=128, verbose_name="보도 날짜")
+    img = models.URLField(max_length=500, default='', null=True, verbose_name="뉴스 이미지")
 
     def __str__(self):
         return self.title
@@ -24,6 +25,7 @@ class OverseasNews (models.Model):
     url = models.URLField(max_length=500, verbose_name="뉴스 링크")
     press = models.CharField(max_length=128, verbose_name="언론사")
     date = models.CharField(max_length=128, verbose_name="보도 날짜")
+    img = models.URLField(max_length=500, default='', null=True, verbose_name="뉴스 이미지")
 
     def __str__(self):
         return self.title
