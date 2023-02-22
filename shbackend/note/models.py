@@ -16,3 +16,13 @@ class Note (models.Model):
         db_table = 'shinhan_member_note'
         verbose_name = '사용자 단어장'
         verbose_name_plural = '사용자 단어장'
+
+
+class Bookmark(models.Model):
+    member = models.ForeignKey('member.Member', on_delete=models.CASCADE, verbose_name='사용자')
+    note = models.ForeignKey('note.Note', on_delete=models.CASCADE, verbose_name='단어')
+
+    class Meta:
+        db_table = 'shinhan_bookmark'
+        verbose_name = '단어 즐겨찾기'
+        verbose_name_plural = '단어 즐겨찾기'
