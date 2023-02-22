@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics, mixins
-from .models import Note
+from .models import Note, Bookmark
 from .serializers import (
     NoteSerializer,
     NoteCreateSerializer,
+    BookmarkSerializer,
 )
 
 from rest_framework.views import APIView
@@ -83,6 +84,7 @@ class NoteTodayRankView (APIView):
 
         return Response(ret, status=status.HTTP_201_CREATED)
 
+
 class NoteWeeklyRankView (APIView):
 
     def get (self, request, *args, **kwargs):
@@ -106,3 +108,35 @@ class NoteWeeklyRankView (APIView):
             })
 
         return Response(ret, status=status.HTTP_201_CREATED)
+    
+
+class BookmarkCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        note_id = request.data.get('note')
+
+        if Bookmark.objects.filter(member=request.user, note_id=note_id).exists():
+            Bookmark.objects.filter(member=request.user, note_id=note_id).delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        object = Bookmark(
+            member = request.user,
+            note_id = note_id,
+        )
+        object.save()
+        return Response(status=status.HTTP_201_CREATED)
+    
+
+class BookmarkView(
+    mixins.ListModelMixin,
+    generics.GenericAPIView,
+):
+    
+    serializer_class = BookmarkSerializer
+
+    def get_queryset(self):
+        return Bookmark.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, args, kwargs)
